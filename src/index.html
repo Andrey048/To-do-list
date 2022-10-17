@@ -5,7 +5,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" type="text/css" href="css/reset.css">
    <link rel="stylesheet" type="text/css" href="css/styles.css">
-   <script type="text/javascript" src="js/script.js" defer></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.12/store.everything.min.js" defer></script>
+   <script type="module" src="js/main.js" defer></script>
    <title>Todo List</title>
 </head>
 <body>
@@ -13,22 +14,21 @@
       <article class="main-wrapper">
          <h1 class="main-title">Todos</h1>
          <form class="todo-add-form">
-            <input class="todo-add-form__field" type="text" placeholder="Add a Todo...">
-            <button class="todo-add-form__btn btn" type="submit">Submit</button>
+            <input class="todo-add-form__field" type="text" placeholder="Add a Todo..." id="add-field">
+            <button class="todo-add-form__btn btn" type="submit" id="add-btn">Submit</button>
          </form>
          <ul class="todos-items">
-            <li class="todos-items__item item-todo item-todo--checked">
-              <input class="item-todo__checkbox" type="checkbox" checked>
-              <span class="item-todo__text">Go to Gym</span>
-              <button class="item-todo__delete btn">Delete</button>
-            </li>
-            <li class="todo__item item-todo">
-              <input class="item-todo__checkbox" type="checkbox">
-              <span class="item-todo__text">Go to Gym</span>
-              <button class="item-todo__delete btn">Delete</button>
-            </li>
+            <!-- Здесь будут задачи -->
          </ul>
       </article>
    </div>
+
+   <template id="todo-template">
+      <li class="todo__item item-todo" data-id="">
+        <input class="item-todo__checkbox" type="checkbox">
+        <span class="item-todo__text">Go to Gym</span>
+        <button class="item-todo__delete btn">Delete</button>
+      </li>
+   </template>
 </body>
 </html>
