@@ -45,7 +45,6 @@ export const data = {
       })
 
       store.set(LOCAL_STORAGE_KEY, currentTodosArray);
-      console.log(currentTodosArray);
    },
    deleteTodo: function(todoId) {
       const currentTodosArray = store.get(LOCAL_STORAGE_KEY);

@@ -1,14 +1,16 @@
-import {renderTodo} from './todo-item.js';
+import {renderTodo, removeTodo, toggleTodoCheckedClass} from './todo-item.js';
 import {data} from './data.js';
+
 
 
 const savedTodosArray = data.getTodos();
 
 if (savedTodosArray) {
    savedTodosArray.forEach(i => {
-      showTodo(i.text, i.id, i.checked);
+      renderTodo(i.text, i.id, i.checked);
    })
 }
+
 
 
 const addBtn = document.querySelector('#add-btn');
@@ -21,12 +23,36 @@ function onClickAddBtn(e) {
    const addField = document.querySelector('#add-field');
 
    const todoText = addField.value;
+   addField.value = '';
 
    data.addTodo(todoText)
       .then((todoId) => {
-         showTodo(todoText, todoId, false);
+         renderTodo(todoText, todoId, false);
       })
 }
-function showTodo(todoText, todoId, todoChecked) {
-   renderTodo(todoText, todoId, todoChecked, id => data.changeCheckedTodo(id), id => data.deleteTodo(id));
+
+
+
+const todosWrapper = document.querySelector('#todos-wrapper');
+
+todosWrapper.addEventListener('click', onClickTodo);
+
+function onClickTodo(e) {
+   const element = e.target;
+
+   if (element.matches('.item-todo__delete')) {
+      const todoElement = element.closest('.item-todo');
+      const todoElementId = Number(todoElement.dataset.id);
+
+      data.deleteTodo(todoElementId);
+
+      removeTodo(todoElement);
+   } else if (element.matches('.item-todo__checkbox')) {
+      const todoElement = element.closest('.item-todo');
+      const todoElementId = Number(todoElement.dataset.id);
+
+      data.changeCheckedTodo(todoElementId);
+
+      toggleTodoCheckedClass(todoElement);
+   }
 }

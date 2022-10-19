@@ -5,8 +5,6 @@ export function renderTodo(todoText, todoId, checked, cbCheck, cbDelete) {
 
    todoElement.dataset.id = todoId;
    todoElement.querySelector('.item-todo__text').textContent = todoText;
-   todoElement.querySelector('.item-todo__checkbox').addEventListener('click', onClickCheckBox);
-   todoElement.querySelector('.item-todo__delete').addEventListener('click', onClickDelete);
 
    if (checked) {
       todoElement.classList.add('item-todo--checked');
@@ -14,17 +12,12 @@ export function renderTodo(todoText, todoId, checked, cbCheck, cbDelete) {
    }
 
    todosContainer.appendChild(todoElement);
+}
 
-   function onClickCheckBox() {
-      const TODO_CHECKED_CLASS = 'item-todo--checked';
+export function removeTodo(todoElement) {
+   todoElement.remove();
+}
 
-      cbCheck(todoId);
-
-      todoElement.classList.toggle(TODO_CHECKED_CLASS);
-   }
-   function onClickDelete() {
-      todoElement.remove();
-
-      cbDelete(todoId);
-   }
+export function toggleTodoCheckedClass(todoElement) {
+   todoElement.classList.toggle('item-todo--checked');
 }
