@@ -59,7 +59,6 @@ body {
 }
 .todos-items__item {}
 
-.item-todo {}
 .item-todo {
   display: flex;
   align-items: center;
@@ -77,6 +76,9 @@ body {
 }
 .item-todo__checkbox {
   margin-right: 15px;
+}
+.item-todo__text {
+   margin-right: 15px;
 }
 .item-todo__delete {
   margin-left: auto;

@@ -1,6 +1,9 @@
 const LOCAL_STORAGE_KEY = 'todos';
 
 export const data = {
+   getTodos: function() {
+      return store.get(LOCAL_STORAGE_KEY);
+   },
    addTodo: async function(todoText) {
       const currentTodosArray = store.get(LOCAL_STORAGE_KEY);
 
@@ -29,9 +32,6 @@ export const data = {
       }
 
       return todoObject.id;
-   },
-   getTodos: function() {
-      return store.get(LOCAL_STORAGE_KEY);
    },
    changeCheckedTodo: function(todoId) {
       const currentTodosArray = store.get(LOCAL_STORAGE_KEY);
