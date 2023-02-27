@@ -4,11 +4,17 @@
    "description": "",
    "private": true,
    "scripts": {
-      "server": "npx live-server --open=src"
+      "server": "npx live-server --open=src",
+	   "eslint": "npx eslint src/js/*.js --fix",
+		"stylelint": "npx stylelint \"./src/css/*.css\" --ignore-pattern src/css/reset.css"
    },
    "author": "",
    "license": "ISC",
    "devDependencies": {
-      "live-server": "^1.2.2"
+      "eslint": "^8.35.0",
+      "eslint-config-airbnb": "^19.0.4",
+      "live-server": "^1.2.2",
+      "stylelint": "^15.2.0",
+      "stylelint-config-htmlacademy": "^1.1.4"
    }
 }
