@@ -1,13 +1,12 @@
 :root {
-  --red-color: tomato;
-  --gray-color: silver;
+  --red-color: #ff6347;
+  --gray-color: #c0c0c0;
 }
-
-
 
 body {
-  font-family: arial, sans-serif;
+  font-family: "arial", sans-serif;
 }
+
 .container {
   max-width: 1170px;
   min-width: 320px;
@@ -15,16 +14,12 @@ body {
   padding: 0 20px;
 }
 
-
-
 .btn {
   padding: 7px 12px;
 
   border-radius: 3px;
   background-color: var(--red-color);
 }
-
-
 
 .main-wrapper {
   max-width: 500px;
@@ -36,7 +31,7 @@ body {
   margin-bottom: 30px;
 
   font-size: 35px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .todo-add-form {
@@ -44,20 +39,19 @@ body {
 
   margin-bottom: 30px;
 }
+
 .todo-add-form__field {
   flex: 1 1 auto;
   padding: 5px 10px;
   margin-right: 10px;
 
-  border:  2px solid var(--gray-color);
+  border: 2px solid var(--gray-color);
   border-radius: 3px;
 }
-.todo-add-form__btn {}
 
 .todos-items {
   padding: 0 5px;
 }
-.todos-items__item {}
 
 .item-todo {
   display: flex;
@@ -68,18 +62,25 @@ body {
   background-color: #cccccc;
   border-radius: 3px;
 }
+
 .item-todo--checked .item-todo__text {
   text-decoration: line-through;
 }
+
 .item-todo:not(:last-child) {
   margin-bottom: 10px;
 }
+
 .item-todo__checkbox {
   margin-right: 15px;
+
+  cursor: pointer;
 }
+
 .item-todo__text {
-   margin-right: 15px;
+  margin-right: 15px;
 }
+
 .item-todo__delete {
   margin-left: auto;
 }
