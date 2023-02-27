@@ -63,10 +63,6 @@ body {
   border-radius: 3px;
 }
 
-.item-todo--checked .item-todo__text {
-  text-decoration: line-through;
-}
-
 .item-todo:not(:last-child) {
   margin-bottom: 10px;
 }
@@ -79,6 +75,10 @@ body {
 
 .item-todo__text {
   margin-right: 15px;
+}
+
+.item-todo__checkbox:checked + .item-todo__text {
+   text-decoration: line-through;
 }
 
 .item-todo__delete {
