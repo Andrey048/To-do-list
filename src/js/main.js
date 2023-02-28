@@ -1,7 +1,14 @@
 import view from './view.js';
 import data from './data.js';
 
-store.clearAll();
+const oldToDos = data.getToDos();
+oldToDos.forEach((toDo) => view.add(
+  toDo.id,
+  toDo.text,
+  toDo.checked,
+  data.toggleCheckToDo.bind(data),
+  data.removeToDo.bind(data),
+));
 
 const addForm = document.querySelector('.todo-add-form');
 addForm.addEventListener('submit', (e) => {
