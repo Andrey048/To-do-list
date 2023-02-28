@@ -1,4 +1,4 @@
-const toDoView = {
+const view = {
   add(toDoId, toDoText, toDoChecked) {
     const toDoTemplate = document.querySelector('#todo-template').content;
     const toDoElement = toDoTemplate.querySelector('.item-todo').cloneNode(true);
@@ -14,8 +14,9 @@ const toDoView = {
       e.preventDefault();
       this.remove(toDoElement);
     });
-    toDoCheckBtn.addEventListener('click', (e) => {
+    toDoCheckBtn.addEventListener('checked', (e) => {
       e.preventDefault();
+      this.toggleCheck(toDoElement);
     });
 
     toDosContainer.appendChild(toDoElement);
@@ -23,6 +24,14 @@ const toDoView = {
   remove(element) {
     element.remove();
   },
+  toggleCheck(element) {
+    const checkboxElement = element.querySelector('.item-todo__checkbox');
+    if (checkboxElement.checked) {
+      checkboxElement.checked = false;
+    } else {
+      checkboxElement.checked = true;
+    }
+  },
 };
 
-export default toDoView;
+export default view;
