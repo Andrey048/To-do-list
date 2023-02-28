@@ -1,5 +1,5 @@
 const view = {
-  add(toDoId, toDoText, toDoChecked) {
+  add(toDoId, toDoText, toDoChecked, checkCb, removeCb) {
     const toDoTemplate = document.querySelector('#todo-template').content;
     const toDoElement = toDoTemplate.querySelector('.item-todo').cloneNode(true);
     const toDoRemoveBtn = toDoElement.querySelector('.item-todo__delete');
@@ -12,11 +12,12 @@ const view = {
 
     toDoRemoveBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      removeCb(toDoId);
       this.remove(toDoElement);
     });
-    toDoCheckBtn.addEventListener('checked', (e) => {
-      e.preventDefault();
-      this.toggleCheck(toDoElement);
+    toDoCheckBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      checkCb(toDoId);
     });
 
     toDosContainer.appendChild(toDoElement);

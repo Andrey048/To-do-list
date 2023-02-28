@@ -1,56 +1,47 @@
-const LOCAL_STORAGE_KEY = 'todos';
+const STORE_KEY = 'todos';
 
-export const data = {
-   getTodos: function() {
-      return store.get(LOCAL_STORAGE_KEY);
-   },
-   addTodo: async function(todoText) {
-      const currentTodosArray = store.get(LOCAL_STORAGE_KEY);
-
-      const todoObject = {
-         id: createTodoId(),
-         text: todoText,
-         checked: false,
+const data = {
+  setToDos(array) {
+    return store.set(STORE_KEY, { arrayToDos: array });
+  },
+  getToDos() {
+    const result = store.get(STORE_KEY);
+    if (result) return result.arrayToDos;
+    return [];
+  },
+  getNewId() {
+    const toDos = this.getToDos();
+    if (toDos.length > 0) {
+      const lastToDo = toDos[toDos.length - 1];
+      return lastToDo.id + 1;
+    }
+    return 1;
+  },
+  addToDo(todoText, cb) {
+    const toDoId = this.getNewId();
+    const toDos = this.getToDos();
+    toDos.push({
+      id: toDoId,
+      text: todoText,
+      checked: false,
+    });
+    this.setToDos(toDos);
+    cb(toDoId, todoText, false, this.toggleCheckToDo.bind(this), this.removeToDo.bind(this));
+  },
+  removeToDo(toDoId) {
+    const toDos = this.getToDos();
+    this.setToDos(toDos.filter((toDo) => toDo.id !== toDoId));
+  },
+  toggleCheckToDo(toDoId) {
+    const toDos = this.getToDos();
+    this.setToDos(toDos.map((toDo) => {
+      if (toDo.id === toDoId) {
+        if (toDo.checked) return { ...toDo, checked: false };
+        return { ...toDo, checked: true };
       }
+      return toDo;
+    }));
+  },
+};
 
-      if (currentTodosArray.length > 0) {
-         currentTodosArray.push(todoObject);
-
-         store.set(LOCAL_STORAGE_KEY, currentTodosArray);
-      } else {
-         store.set(LOCAL_STORAGE_KEY, [todoObject]);
-      }
-
-      function createTodoId() {
-         if (currentTodosArray.length > 0) {
-            const lastTodoId = currentTodosArray[currentTodosArray.length - 1].id;
-
-            return lastTodoId + 1;
-         } else {
-            return 1;
-         }      
-      }
-
-      return todoObject.id;
-   },
-   changeCheckedTodo: function(todoId) {
-      const currentTodosArray = store.get(LOCAL_STORAGE_KEY);
-
-      currentTodosArray.map(i => {
-         if (i.id === todoId) {
-            i.checked = !i.checked;
-
-            return i;
-         }
-      })
-
-      store.set(LOCAL_STORAGE_KEY, currentTodosArray);
-   },
-   deleteTodo: function(todoId) {
-      const currentTodosArray = store.get(LOCAL_STORAGE_KEY);
-
-      const newCurrentTodosArray = currentTodosArray.filter(i => i.id !== todoId);
-
-      store.set(LOCAL_STORAGE_KEY, newCurrentTodosArray);
-   }
-}
+export default data;
