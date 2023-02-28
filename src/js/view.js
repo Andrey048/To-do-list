@@ -16,7 +16,6 @@ const view = {
       this.remove(toDoElement);
     });
     toDoCheckBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
       checkCb(toDoId);
     });
 
@@ -24,14 +23,6 @@ const view = {
   },
   remove(element) {
     element.remove();
-  },
-  toggleCheck(element) {
-    const checkboxElement = element.querySelector('.item-todo__checkbox');
-    if (checkboxElement.checked) {
-      checkboxElement.checked = false;
-    } else {
-      checkboxElement.checked = true;
-    }
   },
 };
 
